@@ -1,8 +1,9 @@
 import './App.css';
 import { uuid } from 'uuidv4';
+import React from 'react';
 
-const App = ()=> {
-  const group = {
+class App extends React.Component {
+  group = {
     name: 'Group 1',
     member: [
       {
@@ -16,46 +17,51 @@ const App = ()=> {
     ]
   }
 
-  const handleClick =(e)=> {
-    console.log(e.target.innerHTML);
-    console.log(typeof(e.target));
+  render(){
+    return(
+      <div>
+        <HeaderPart handleClick = {this.handleClick} name = {this.group.name}/>
+        <ContentPart member = {this.group.member}/>
+    </div>
+    )
+    
+  };
+}
 
+class HeaderPart extends React.Component{
+  render(){
+    return(
+      <div>
+        <p > {this.props.name}</p>
+        <input type="checkbox" id="item1" name="item" value="Paneer" onClick={this.props.handleClick}/>
+      </div>
+      
+    )
   }
-  return (
-    <div>
-      <HeaderPart handleClick = {handleClick} name = {group.name}/>
-      <ContentPart member = {group.member}/>
-    </div>
-  );
+  
 }
 
-const HeaderPart = props =>{
-  return(
-    <div>
-      <p onClick={() => {console.log("hello")}}> {props.name}</p>
-      <input type="checkbox" id="item1" name="item" value="Paneer" onClick={props.handleClick}/>
-    </div>
-    
-  )
+class ContentPart extends React.Component{
+  render(){
+    return (
+      <div>
+        {this.props.member.map(member => 
+          <DetailPart key = {uuid()} index = {uuid()} item = {member}/>
+        )}
+      </div>
+    )
+  }
 }
-
-const ContentPart = props=>{
-  return (
-    <div>
-      {props.member.map(member => 
-        <DetailPart key = {uuid()} index = {uuid()} item = {member}/>
-      )}
-    </div>
-
-  )
-}
-const DetailPart = props =>{
-  return(
-    <div data-index = {props.index}>
-      <p>{props.item.name} - {props.item.mssv} - {props.key}</p>
-      <button onClick={e => e.target.closest(`[data-index="${props.index}"]`).remove()}>Delete</button>
-    </div>
-    
-  )
+class DetailPart extends React.Component{
+  render(){
+    return(
+      <div data-index = {this.props.index}>
+        <p>{this.props.item.name} - {this.props.item.mssv} - {this.props.key}</p>
+        <button onClick={e => e.target.closest(`[data-index="${this.props.index}"]`).remove()}>Delete</button>
+      </div>
+      
+    )
+  }
+  
 }
 export default App;
