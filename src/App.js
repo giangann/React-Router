@@ -8,9 +8,18 @@ class App extends React.Component {
     this.state = {status: true}
   }
 
-  handleOnOff (){
-    this.setState(this.status = !this.state.status)
-  }
+  handleOnOff =()=>{
+    this.setState({status: !this.state.status})
+  } 
+
+  //nếu để dạng bên dưới thì sẽ không chạy, (phải để function có dạng callback)
+  // mã lỗi: TypeError: Cannot read properties of undefined (reading 'setState')
+
+  // handleOnOff (){
+  //   this.setState({status: !this.state.status})
+  // } 
+
+  
 
   render(){
     return(
