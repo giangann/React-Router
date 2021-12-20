@@ -1,29 +1,42 @@
 import './App.css';
 import { uuid } from 'uuidv4';
 import React, { useState } from 'react';
+import FormInput from './Components/FormInput';
+import ShowList from './Components/ShowList';
 
 const App=()=>{
-  const [count,setCount] = useState({number:{flag:0}})
+  // state to save work need to do
+  const [todos, setTodos] = useState([
+    {
+      id: uuid(),
+      work: "Brush Teeth"
+    },
+    {
+      id: uuid(),
+      work: "Learn Japaneses"
+    }
+  ])
 
-  const handleAdd = ()=>{
-    setCount(
-      count =>(
-        {
-          ...count,
-          number: {
-            ...count.number,
-            flag: count.number.flag+1
-          }
-          }
-      )
-    )
+  // funtion delete specifies work
+  const handleDelete = (e,index) =>{
+    e.target.closest(`[data-index="${index}"]`).remove()
   }
 
-  
+  // function handle when add work
+  const handleAdd = (value) =>{
+    setTodos([
+      ...todos,
+      {
+        id: Math.floor(Math.random() * 1000),
+        content: value
+      }
+    ])
+  }
+
   return(
     <div>
-      <button onClick={handleAdd}>Add</button>
-      {count.number.flag}
+      <FormInput handleAdd = {handleAdd}  />
+      <ShowList todos = {todos} handleDelete={handleDelete}/>
     </div>
   )
 }
