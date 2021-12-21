@@ -5,20 +5,28 @@ const FormInput = ({ handleAdd }) => {
   // state to save user input
   const [values, setValue] = useState("");
 
-  const handleSubmit = () => {
-    console.log({values})
-    handleAdd({values});
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+    handleAdd(values);
   };
 
   // function handle change
   const handleChange = (e) => {
-    e.preventDefault();
     setValue(e.target.value);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (values !== "") {
+            handleAdd(values);
+            setValue("");
+          }
+        }}
+      >
         <input
           onChange={(e) => handleChange(e)}
           type="text"

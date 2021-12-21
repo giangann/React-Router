@@ -1,10 +1,10 @@
 import '../App.js'
 
-const ShowList = ({todos}) =>{
+const ShowList = ({todos, handleDelete}) =>{
     return(
         <div>
             {todos.map(
-                todo => <ShowListDetails todo = {todo} key={todo.id}/>
+                todo => <ShowListDetails todo = {todo} key={todo.id} index = {todo.id} handleDelete = {handleDelete}/>
             )}
         </div>
     )
@@ -13,8 +13,9 @@ const ShowList = ({todos}) =>{
 
 const ShowListDetails = props =>{
     return(
-        <div>
+        <div data-index = {props.index}>
             {props.todo.work}
+            <button type='submit' onClick={(e) => props.handleDelete(e,props.index)}>Delete</button>
         </div>
     )
 }

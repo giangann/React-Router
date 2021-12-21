@@ -1,5 +1,5 @@
 import './App.css';
-import { uuid } from 'uuidv4';
+// import { uuid } from 'uuidv4';
 import React, { useState } from 'react';
 import FormInput from './Components/FormInput';
 import ShowList from './Components/ShowList';
@@ -8,11 +8,11 @@ const App=()=>{
   // state to save work need to do
   const [todos, setTodos] = useState([
     {
-      id: uuid(),
+      id: 1,  
       work: "Brush Teeth"
     },
     {
-      id: uuid(),
+      id: 1,  
       work: "Learn Japaneses"
     }
   ])
@@ -25,12 +25,15 @@ const App=()=>{
   // function handle when add work
   const handleAdd = (value) =>{
     setTodos([
-      ...todos,
+      ...todos,   
       {
         id: Math.floor(Math.random() * 1000),
-        content: value
+        work: value
       }
     ])
+    console.log(todos)
+    console.log(todos[0].work)
+    console.log(todos[0].id)
   }
 
   return(
