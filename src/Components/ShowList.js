@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import '../App.js'
 
 const ShowList = ({todos, handleDelete}) =>{
@@ -11,11 +12,20 @@ const ShowList = ({todos, handleDelete}) =>{
 
 }
 
-const ShowListDetails = props =>{
+const ShowListDetails = ({todo,index,handleDelete}) =>{
+    useEffect(
+        ()=>{
+            console.log("component mount - side Effect")
+
+            return(
+                console.log("component unmount - Cleanup")
+            )
+        }
+    )
     return(
-        <div data-index = {props.index}>
-            {props.todo.work}
-            <button type='submit' onClick={(e) => props.handleDelete(e,props.index)}>Delete</button>
+        <div data-index = {todo.index}>
+            {todo.work}-{todo.deadline}
+            <button type='submit' onClick={(e) => handleDelete(e,index)}>Delete</button>
         </div>
     )
 }
