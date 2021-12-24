@@ -11,16 +11,21 @@ const App = () => {
       id: 1,
       work: "Brush Teeth",
       deadline: "2021-12-18",
+      isCompleted: true,
     },
     {
-      id: 1,
+      id: 2,
       work: "Learn Japaneses",
       deadline: "2021-12-17",
+      isCompleted: false,
+
     },
     {
-      id: 1,
+      id: 3,
       work: "Practice React",
       deadline: "2021-12-21",
+      isCompleted: false,
+
     },
   ]);
 

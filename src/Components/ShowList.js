@@ -1,3 +1,4 @@
+import Checkbox from 'antd/lib/checkbox/Checkbox'
 import { useEffect } from 'react'
 import '../App.js'
 
@@ -13,19 +14,15 @@ const ShowList = ({todos, handleDelete}) =>{
 }
 
 const ShowListDetails = ({todo,index,handleDelete}) =>{
-    useEffect(
-        ()=>{
-            console.log("component mount - side Effect")
-
-            return(
-                console.log("component unmount - Cleanup")
-            )
-        }
-    )
+    const chooseFav = (e,index) =>{
+        // console.log("favourite choose")
+        console.log(e.target(`[data-index="${index}"]`).value)
+    }
     return(
         <div data-index = {todo.index}>
             {todo.work}-{todo.deadline}
             <button type='submit' onClick={(e) => handleDelete(e,index)}>Delete</button>
+            <Checkbox onChange={chooseFav}></Checkbox>
         </div>
     )
 }
