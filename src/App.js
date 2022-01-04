@@ -4,30 +4,12 @@ import FormInput from "./Components/FormInput";
 import ShowList from "./Components/ShowList";
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
+import { MockTask } from "./MockTask";
 
 
 const App = () => {
   // state to save work need to do
-  const [todos, setTodos] = useState([
-    {
-      id: uuidv4(),
-      work: "Brush Teeth",
-      deadline: "2021-12-18",
-      isCompleted: true,
-    },
-    {
-      id: uuidv4(),
-      work: "Learn Japaneses",
-      deadline: "2021-12-17",
-      isCompleted: false,
-    },
-    {
-      id: uuidv4(),
-      work: "Practice React",
-      deadline: "2021-12-21",
-      isCompleted: false,
-    },
-  ]);
+  const [todos, setTodos] = useState(MockTask);
 
   // partition data:
   const partition = _.partition(todos, "isCompleted");
