@@ -5,18 +5,21 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Store } from "../Redux/Store.js";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { OnChange } from "../Redux/ActionCreator.js";
+import { OnChange,HandleAdd } from "../Redux/ActionCreator.js";
 
-const FormInput = ({ handleAdd }) => {
 
-// HANDLE WHEN USER TYPE WORK TO DO
-  // state to save user input
-  // const [values, setValue] = useState("");
-  
-  // function handle change
-  // const handleChange = (e) => {
-  //   setValue(e.target.value);
-  // };
+const FormInput = () => {
+
+  // Declare for send action to reducer
+  const dispatch = useDispatch()
+
+// HANDLE WHEN USER TYPE WORK IN INPUT FIELD
+  const values = useSelector(state => state.value)
+  const todoItem = useSelector(state=>state.todoList)
+  const handleChange = (e) =>{
+    dispatch(OnChange(e.target.value))
+  }
+
   
 // HANDLE WHEN USER CHOOSE DATE
   var deadline = ''
@@ -27,18 +30,14 @@ const FormInput = ({ handleAdd }) => {
 
 // HANDLE WHEN USER SUBMIT FORM
   const handleSubmit = (e) => {
-    e.preventDefault();
 
-    handleAdd(values,deadline);
-    
+    e.preventDefault()
+    dispatch(HandleAdd(values))
+    console.log(values)
+    console.log(todoItem)
     // setValue('')
   };
-  const dispatch = useDispatch()
 
-  const values = useSelector(state => state.value)
-  const handleChange = (e) =>{
-    dispatch(OnChange(e.target.value))
-  }
 
   useSelector(state => state)
 

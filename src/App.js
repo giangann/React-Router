@@ -5,14 +5,17 @@ import ShowList from "./Components/ShowList";
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { MockTask } from "./MockTask";
+import { useSelector } from "react-redux";
 
 
 const App = () => {
   // state to save work need to do
   const [todos, setTodos] = useState(MockTask);
 
+  const todos2 = useSelector(state => state.todoList)
+
   // partition data:
-  const partition = _.partition(todos, "isCompleted");
+  const partition = _.partition(todos2, "isCompleted");
 
   // sort todos data:
   const taskCompleted = _.orderBy(partition[0], ["deadline"], ["asc"]);
@@ -44,9 +47,6 @@ const App = () => {
     setTodos(tempTodos);
   };
 
-  console.log(todos)
-  console.log("task completed",taskCompleted)
-  console.log("task not completed",taskNotCompleted)
 
   return (
     <div>

@@ -7,3 +7,12 @@ export const OnChange = (value) => {
         }
     }
 }
+
+export const HandleAdd = (newTodoName) =>{
+    return {
+        type: "HANDLE_ADD",
+        payload:{
+            value: newTodoName,
+        }
+    }
+}
