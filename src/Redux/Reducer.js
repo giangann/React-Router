@@ -15,7 +15,7 @@ export default function reducer(
       const tempNewTask = {
         id: uuidv4(),
         work: action.payload.value,
-        deadline: "",
+        deadline: action.payload.deadline,
         isCompleted: false,
       };
       return {

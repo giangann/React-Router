@@ -8,11 +8,12 @@ export const OnChange = (value) => {
     }
 }
 
-export const HandleAdd = (newTodoName) =>{
+export const HandleAdd = (newTodoName,deadline) =>{
     return {
         type: "HANDLE_ADD",
         payload:{
             value: newTodoName,
+            deadline:deadline
         }
     }
 }

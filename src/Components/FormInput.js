@@ -32,7 +32,7 @@ const FormInput = () => {
   const handleSubmit = (e) => {
 
     e.preventDefault()
-    dispatch(HandleAdd(values))
+    dispatch(HandleAdd(values,deadline))
     console.log(values)
     console.log(todoItem)
     // setValue('')
