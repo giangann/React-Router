@@ -1,16 +1,14 @@
 import "./App.css";
-import React, { useState } from "react";
+import React from "react";
 import FormInput from "./Components/FormInput";
 import ShowList from "./Components/ShowList";
 import _ from "lodash";
-import { v4 as uuidv4 } from "uuid";
-import { MockTask } from "./MockTask";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { HandleCheck } from "./Redux/ActionCreator";
 
 
 const App = () => {
   // state to save work need to do
-  const [todos, setTodos] = useState(MockTask);
 
   const todos2 = useSelector(state => state.todoList)
 
@@ -26,31 +24,17 @@ const App = () => {
     e.target.closest(`[data-index="${index}"]`).remove();
   };
 
-  // function handle when add work
-  const handleAdd = (value, deadline) => {
-    setTodos([
-      ...todos,
-      {
-        id: uuidv4(),
-        work: value,
-        deadline: deadline,
-      },
-    ]);
-    
-  };
-
+  
   // function handle when check
+  const dispatch = useDispatch()
   const handleCheck = (id, value) => {
-    const tempTodos = todos.map((todo) =>
-      todo.id === id ? {...todo, isCompleted: value } : todo
-    );
-    setTodos(tempTodos);
+    dispatch(HandleCheck(id,value))
   };
 
 
   return (
     <div>
-      <FormInput handleAdd={handleAdd} />
+      <FormInput/>
       <div>
         <h1>Task Completed</h1>
         {taskCompleted.map((item) => (

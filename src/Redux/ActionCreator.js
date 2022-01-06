@@ -17,3 +17,13 @@ export const HandleAdd = (newTodoName,deadline) =>{
         }
     }
 }
+
+export const HandleCheck = (id, value) =>{
+    return{
+        type: "HANDLE_CHECK",
+        payload:{
+            value:value,
+            id: id
+        }
+    }
+}

@@ -11,6 +11,7 @@ export default function reducer(
         ...state,
         value: action.payload.value,
       };
+
     case "HANDLE_ADD":
       const tempNewTask = {
         id: uuidv4(),
@@ -22,6 +23,17 @@ export default function reducer(
         ...state,
         todoList: [...state.todoList, tempNewTask]
       };
+
+    case "HANDLE_CHECK":
+      const tempTodoList = state.todoList.map(
+        (todo => (todo.id === action.payload.id) ? {
+          ...todo, isCompleted: action.payload.value
+        }: todo)
+      )
+      return{
+        ...state,
+        todoList: tempTodoList
+      }
     default:
       return state;
   }
