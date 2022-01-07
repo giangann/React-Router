@@ -34,6 +34,15 @@ export default function reducer(
         ...state,
         todoList: tempTodoList
       }
+
+    case "HANDLE_DELETE":
+      const tempDeleteList = state.todoList.filter(
+        todo => todo.id !== action.payload.id
+      ) 
+      return{
+        ...state,
+        todoList: tempDeleteList
+      }
     default:
       return state;
   }

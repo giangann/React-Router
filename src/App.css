@@ -24,6 +24,19 @@
   color: white;
 }
 
+.form_input{
+  
+}
+.outer{
+  width: 50%;
+  margin:0 auto;
+  border: 1px solid black;
+}
+.title{
+  margin: auto;
+  margin-top: 20px;
+  width: fit-content;
+}
 .App-link {
   color: #61dafb;
 }

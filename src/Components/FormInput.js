@@ -1,4 +1,5 @@
 import "../App.js";
+import "../../src/App"
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { useSelector } from "react-redux";
@@ -40,20 +41,18 @@ const FormInput = () => {
   useSelector(state => state)
 
   return(
-    <div>
+    <div className="form_input">
       <form onSubmit={handleSubmit}>
         <input
           onChange={(e) => handleChange(e)}
           type="text"
           value={values}
           name="input"
+          placeholder="Type new work to do"
         />
+        <br></br>
         <Space direction="vertical">
           <DatePicker onChange={onChange} />
-          <DatePicker onChange={onChange} picker="week" />
-          <DatePicker onChange={onChange} picker="week" />
-          <DatePicker onChange={onChange} picker="quarter" />
-          <DatePicker onChange={onChange} picker="year" />
         </Space>
         <input type="submit" value="submit" />
       </form>

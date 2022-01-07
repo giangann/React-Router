@@ -27,3 +27,12 @@ export const HandleCheck = (id, value) =>{
         }
     }
 }
+
+export const HandleDelete = (id) =>{
+    return{
+        type: "HANDLE_DELETE",
+        payload:{
+            id:id
+        }
+    }
+}
