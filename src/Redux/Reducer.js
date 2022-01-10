@@ -21,7 +21,8 @@ export default function reducer(
       };
       return {
         ...state,
-        todoList: [...state.todoList, tempNewTask]
+        todoList: [...state.todoList, tempNewTask],
+        value: ""
       };
 
     case "HANDLE_CHECK":

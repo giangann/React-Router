@@ -1,9 +1,13 @@
 import { Button } from "antd";
 import Checkbox from "antd/lib/checkbox/Checkbox";
-import "../App.js";
+import { useSelector } from "react-redux";
 
 const ShowList = ({ index, todos, handleDelete, handleCheck }) => {
   console.log(todos);
+  console.log("hi")
+
+  const checkValues = useSelector(state => state.value)
+  console.log(checkValues)
   return (
     <div >
       {todos.work} - {todos.deadline}
