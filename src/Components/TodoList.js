@@ -1,12 +1,12 @@
 import React from "react";
 import ShowList from "./ShowList";
-import FormInput from "./FormInput";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { HandleCheck, HandleDelete } from "../Redux/ActionCreator";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import App from "../App";
-
+<style>
+  @import
+  url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
+</style>;
 const TodoList = () => {
   const todos2 = useSelector((state) => state.todoList);
 
@@ -29,10 +29,10 @@ const TodoList = () => {
 
   return (
     <div className="outer">
-      
       <h1 className="title">TODO APP</h1>
       <div>
-        <h1 className="title">Task Completed</h1>
+        <h2 className="title">Task Completed</h2>
+
         {taskCompleted.map((item) => (
           <ShowList
             key={item.id}
@@ -45,7 +45,8 @@ const TodoList = () => {
       </div>
 
       <div>
-        <h1 className="title">Task Not Completed</h1>
+        <h2 className="title">Task Not Completed</h2>
+
         {taskNotCompleted.map((item) => (
           <ShowList
             key={item.id}

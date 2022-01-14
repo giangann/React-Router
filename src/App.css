@@ -31,11 +31,32 @@
   width: 50%;
   margin:0 auto;
   border: 1px solid black;
+  border-radius: 1%;
+  background-color: #3c424a;
+  color: #dde6ee;
 }
+
 .title{
-  margin: auto;
-  margin-top: 20px;
+  margin-bottom: 20px ;
+  width: 100%;
+  text-align: center center;
+  background-color: #1890ff;
+  font-family: 'Oswald', sans-serif;
+  
+}
+
+div.outer h1{
+  height:80px;
   width: fit-content;
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 20px;
+  border: solid none whitesmoke;
+  border-radius: 5%;
+}
+
+div h2{
+  padding-left: 20px;
 }
 .App-link {
   color: #61dafb;
