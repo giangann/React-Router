@@ -5,14 +5,16 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { OnChange, HandleAdd } from "../Redux/ActionCreator.js";
-import { Link, Route, Switch , BrowserRouter as Router } from "react-router-dom";
+import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 import App from "../App.js";
 import ShowList from "./ShowList.js";
 import TodoList from "./TodoList.js";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const FormInput = () => {
   // Declare for send action to reducer
+  const history = useHistory();
   const dispatch = useDispatch();
 
   // HANDLE WHEN USER TYPE WORK IN INPUT FIELD
@@ -25,7 +27,6 @@ const FormInput = () => {
   // HANDLE WHEN USER CHOOSE DATE
   var deadline = "";
   const onChange = (date, dateString) => {
-    console.log(date, dateString);
     deadline = dateString;
   };
 
@@ -33,8 +34,6 @@ const FormInput = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(HandleAdd(values, deadline));
-    console.log(values);
-    console.log(todoItem);
   };
 
   useSelector((state) => state);
@@ -54,9 +53,9 @@ const FormInput = () => {
           <DatePicker onChange={onChange} />
         </Space>
         <input type="submit" value="submit" />
+        
+        
       </form>
-
-      
     </div>
   );
 };

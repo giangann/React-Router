@@ -4,11 +4,7 @@ import { useSelector } from "react-redux";
 import styles from "../ShowList.module.css";
 
 const ShowList = ({ index, todos, handleDelete, handleCheck }) => {
-  console.log(todos);
-  console.log("hi");
 
-  const checkValues = useSelector((state) => state.value);
-  console.log(checkValues);
   return (
     <div>
       <div className={styles.todo_item}>

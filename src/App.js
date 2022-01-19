@@ -2,7 +2,12 @@ import "./App.css";
 import React from "react";
 import FormInput from "./Components/FormInput";
 import { useDispatch, useSelector } from "react-redux";
-import { HandleCheck, HandleDelete } from "./Redux/ActionCreator";
+import {
+  HandleCheck,
+  HandleDelete,
+  SignIn,
+  SignOut,
+} from "./Redux/ActionCreator";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import TodoList from "./Components/TodoList";
 import { useContext, createContext, useState } from "react";
@@ -14,11 +19,10 @@ const App = () => {
     <ProvideAuth>
       <Router>
         <div>
-          <AuthButton/>
+          <AuthButton />
           <Link to="/add_todo">Add Todo Task</Link>
           <br></br>
           <Link to="/home">ShowList</Link>
-
         </div>
         <Switch>
           <PrivateRoute path="/add_todo">
@@ -27,8 +31,8 @@ const App = () => {
           <Route path="/home">
             <TodoList />
           </Route>
-          <Route path = "/login">
-            <LoginPage/>
+          <Route path="/login">
+            <LoginPage />
           </Route>
         </Switch>
       </Router>
@@ -37,7 +41,7 @@ const App = () => {
 };
 export default App;
 
-// ProvideAuth, AuthButton, ProtectedRoute, FakeAuth, 
+// ProvideAuth, AuthButton, ProtectedRoute, FakeAuth,
 // auth = createContext(useProvideAuth), [user, setUser] = useState
 const fakeAuth = {
   isAuthenticated: false,
@@ -48,7 +52,7 @@ const fakeAuth = {
   signout(cb) {
     fakeAuth.isAuthenticated = false;
     setTimeout(cb, 100);
-  }
+  },
 };
 
 /** For more details on
@@ -59,28 +63,24 @@ const authContext = createContext();
 
 function ProvideAuth({ children }) {
   const auth = useProvideAuth();
-  return (
-    <authContext.Provider value={auth}>
-      {children}
-    </authContext.Provider>
-  );
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
 function useAuth() {
-  return useContext(authContext);
+  return useSelector((state) => state.isLoggedIn);
 }
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
 
-  const signin = cb => {
+  const signin = (cb) => {
     return fakeAuth.signin(() => {
       setUser("user");
       cb();
     });
   };
 
-  const signout = cb => {
+  const signout = (cb) => {
     return fakeAuth.signout(() => {
       setUser(null);
       cb();
@@ -90,20 +90,23 @@ function useProvideAuth() {
   return {
     user,
     signin,
-    signout
+    signout,
   };
 }
 
 function AuthButton() {
   let history = useHistory();
-  let auth = useAuth();
+  let auth = useSelector((state) => state.isLoggedIn);
 
-  return auth.user ? (
+  const dispatch = useDispatch();
+
+  return auth ? (
     <p>
       Welcome!{" "}
       <button
         onClick={() => {
-          auth.signout(() => history.push("/"));
+          dispatch(SignOut());
+          history.push("/homei")
         }}
       >
         Sign out
@@ -122,13 +125,13 @@ function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        auth.user ? (
+        auth ? (
           children
         ) : (
           <Redirect
             to={{
               pathname: "/login",
-              state: { from: location }
+              state: { from: location },
             }}
           />
         )
@@ -148,20 +151,22 @@ function ProtectedPage() {
 function LoginPage() {
   let history = useHistory();
   let location = useLocation();
-  let auth = useAuth();
 
   let { from } = location.state || { from: { pathname: "/" } };
-  console.log(from)
-  let login = () => {
-    auth.signin(() => {
-      history.replace(from);
-    });
-  };
+
+  const dispatch = useDispatch();
 
   return (
     <div>
       <p>You must log in to view the page at {from.pathname}</p>
-      <button onClick={login}>Log in</button>
+      <button
+        onClick={() => {
+          dispatch(SignIn());
+          history.replace(from);
+        }}
+      >
+        Log in
+      </button>
       <button>hey</button>
     </div>
   );

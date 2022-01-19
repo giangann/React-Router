@@ -2,7 +2,7 @@ import { MockTask } from "../MockTask";
 import { v4 as uuidv4 } from "uuid";
 
 export default function reducer(
-  state = { todoList: MockTask, value: "" },
+  state = { todoList: MockTask, value: "",isLoggedIn: false},
   action
 ) {
   switch (action.type) {
@@ -43,6 +43,16 @@ export default function reducer(
       return{
         ...state,
         todoList: tempDeleteList
+      }
+    case "SIGN_IN":
+      return{
+        ...state,
+        isLoggedIn:true
+      }
+    case "SIGN_OUT":
+      return{
+        ...state,
+        isLoggedIn:false
       }
     default:
       return state;
