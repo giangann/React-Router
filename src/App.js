@@ -2,96 +2,46 @@ import "./App.css";
 import React from "react";
 import FormInput from "./Components/FormInput";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  HandleCheck,
-  HandleDelete,
-  SignIn,
-  SignOut,
-} from "./Redux/ActionCreator";
+import { SignIn, SignOut } from "./Redux/ActionCreator";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import TodoList from "./Components/TodoList";
-import { useContext, createContext, useState } from "react";
 import { Redirect, useHistory, useLocation } from "react-router-dom";
-import { ConfigContext } from "antd/lib/config-provider";
 
 const App = () => {
   return (
-    <ProvideAuth>
-      <Router>
-        <div>
-          <AuthButton />
-          <Link to="/add_todo">Add Todo Task</Link>
-          <br></br>
-          <Link to="/home">ShowList</Link>
-        </div>
-        <Switch>
-          <PrivateRoute path="/add_todo">
-            <FormInput />
-          </PrivateRoute>
-          <Route path="/home">
-            <TodoList />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-        </Switch>
-      </Router>
-    </ProvideAuth>
+    <Router>
+      <div>
+        <AuthButton />
+        <Link to="/add_todo">Add Todo Task</Link>
+        <br></br>
+        <Link to="/home">ShowList</Link>
+      </div>
+      <Switch>
+        <PrivateRoute path="/add_todo">
+          <FormInput />
+        </PrivateRoute>
+        <Route path="/home">
+          <TodoList />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 export default App;
 
 // ProvideAuth, AuthButton, ProtectedRoute, FakeAuth,
 // auth = createContext(useProvideAuth), [user, setUser] = useState
-const fakeAuth = {
-  isAuthenticated: false,
-  signin(cb) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb) {
-    fakeAuth.isAuthenticated = false;
-    setTimeout(cb, 100);
-  },
-};
 
 /** For more details on
  * `authContext`, `ProvideAuth`, `useAuth` and `useProvideAuth`
  * refer to: https://usehooks.com/useAuth/
  */
-const authContext = createContext();
-
-function ProvideAuth({ children }) {
-  const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
 
 function useAuth() {
   return useSelector((state) => state.isLoggedIn);
-}
-
-function useProvideAuth() {
-  const [user, setUser] = useState(null);
-
-  const signin = (cb) => {
-    return fakeAuth.signin(() => {
-      setUser("user");
-      cb();
-    });
-  };
-
-  const signout = (cb) => {
-    return fakeAuth.signout(() => {
-      setUser(null);
-      cb();
-    });
-  };
-
-  return {
-    user,
-    signin,
-    signout,
-  };
 }
 
 function AuthButton() {
@@ -106,7 +56,7 @@ function AuthButton() {
       <button
         onClick={() => {
           dispatch(SignOut());
-          history.push("/homei")
+          history.push("/homei");
         }}
       >
         Sign out
@@ -138,14 +88,6 @@ function PrivateRoute({ children, ...rest }) {
       }
     />
   );
-}
-
-function PublicPage() {
-  return <h3>Public</h3>;
-}
-
-function ProtectedPage() {
-  return <h3>Protected</h3>;
 }
 
 function LoginPage() {
