@@ -2,9 +2,11 @@ import { MockTask } from "../MockTask";
 import { v4 as uuidv4 } from "uuid";
 
 export default function reducer(
-  state = { todoList: MockTask, value: "",isLoggedIn: false},
+  state = { todoList: MockTask, value: "",isLoggedIn: localStorage.getItem("isLoggined")},
   action
 ) {
+  console.log(state.isLoggedIn)
+
   switch (action.type) {
     case "ON_CHANGE":
       return {
@@ -45,11 +47,14 @@ export default function reducer(
         todoList: tempDeleteList
       }
     case "SIGN_IN":
+      localStorage.setItem("isLoggined",true)
       return{
         ...state,
         isLoggedIn:true
       }
     case "SIGN_OUT":
+      localStorage.removeItem("isLoggined")
+
       return{
         ...state,
         isLoggedIn:false
