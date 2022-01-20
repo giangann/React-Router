@@ -1,6 +1,5 @@
 import { Button } from "antd";
 import Checkbox from "antd/lib/checkbox/Checkbox";
-import { useSelector } from "react-redux";
 import styles from "../ShowList.module.css";
 
 const ShowList = ({ index, todos, handleDelete, handleCheck }) => {
