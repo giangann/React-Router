@@ -5,7 +5,6 @@ export default function reducer(
   state = { todoList: MockTask, value: "",isLoggedIn: localStorage.getItem("isLoggined")},
   action
 ) {
-  console.log(state.isLoggedIn)
 
   switch (action.type) {
     case "ON_CHANGE":

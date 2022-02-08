@@ -5,6 +5,7 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { OnChange, HandleAdd } from "../Redux/ActionCreator.js";
+import AxiosTestPage from "./AxiosTestPage.js";
 
 const FormInput = () => {
   // Declare for send action to reducer
@@ -44,6 +45,7 @@ const FormInput = () => {
         <Space direction="vertical">
           <DatePicker onChange={onChange} />
         </Space>
+        {/* <AxiosTestPage handleChange = {handleChange}/> */}
         <input type="submit" value="submit" />
       </form>
     </div>
