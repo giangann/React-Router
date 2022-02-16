@@ -16,8 +16,24 @@ const PostTodo = (inputValue) => {
   });
 };
 
+const ChangeTaskCompleted = (todoID, status)=>{
+  axios.post(apiEndPoint+"/Todo/ChangeTaskCompletedState",{
+    taskID: todoID,
+    isCompleted: status
+  })
+}
+
+const ChangeTaskFavourite = (todoID, isFavourite)=>{
+  axios.post(apiEndPoint+"/Todo/ChangeTaskFavoriteState",{
+    taskID: todoID,
+    isFavorite: isFavourite
+  })
+}
+
 const TodoService = {
   GetTodos,
   PostTodo,
+  ChangeTaskCompleted,
+  ChangeTaskFavourite
 };
 export default TodoService;

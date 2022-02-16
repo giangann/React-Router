@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SignIn, SignOut } from "./Redux/ActionCreator";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import TodoList from "./Components/TodoList";
-import AxiosTestPage from "./Components/AxiosTestPage"
+import AxiosTestPage from "./Components/AxiosTestPage";
 import { Redirect, useHistory, useLocation } from "react-router-dom";
 
 const App = () => {
@@ -30,7 +30,6 @@ const App = () => {
         <Route path="/axios">
           <AxiosTestPage />
         </Route>
-
       </Switch>
     </Router>
   );

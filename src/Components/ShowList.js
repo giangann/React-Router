@@ -1,17 +1,39 @@
 import { Button } from "antd";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 import styles from "../ShowList.module.css";
+import TodoService from "../Services/TodoService";
+import { AiFillHeart } from "react-icons/ai";
 
-const ShowList = ({ index, todos, handleDelete, handleCheck }) => {
-
+const ShowList = ({
+  index,
+  todos,
+  handleDelete,
+  handleCheckCompleted,
+  handleCheckFavourite,
+}) => {
   return (
     <div>
       <div className={styles.todo_item}>
-        {todos.work}
+        {todos.taskName}
         <div className={styles.actions}>
+          <AiFillHeart
+            // className={styles.heart}
+            // style={{width: 500}}
+            style={{ color: todos.isFavorite ? "orange" : "green" }}
+            size={24}
+            onClick={(e) => {
+              handleCheckFavourite(todos.id, !todos.isFavorite);
+              console.log(todos.taskName);
+              console.log("is Favourited", todos.isFavorite);
+            }}
+          />
           <Checkbox
             defaultChecked={todos.isCompleted}
-            onChange={(e) => handleCheck(todos.id, e.target.checked)}
+            onChange={(e) => {
+              handleCheckCompleted(todos.id, !todos.isCompleted);
+              console.log(todos.taskName);
+              console.log("is Completed", !todos.isCompleted);
+            }}
           ></Checkbox>
           <Button style={styles.Button} onClick={() => handleDelete(index)}>
             Delete
