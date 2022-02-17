@@ -5,7 +5,7 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { OnChange, HandleAdd } from "../Redux/ActionCreator.js";
-import AxiosTestPage from "./AxiosTestPage.js";
+import TodoService from "../Services/TodoService.js";
 
 const FormInput = () => {
   // Declare for send action to reducer
@@ -24,9 +24,11 @@ const FormInput = () => {
   };
 
   // HANDLE WHEN USER SUBMIT FORM
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    dispatch(HandleAdd(values, deadline));
+
+    await TodoService.PostTodo(values)
+    dispatch(HandleAdd(values));
   };
 
   useSelector((state) => state);

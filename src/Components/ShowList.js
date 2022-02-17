@@ -3,6 +3,7 @@ import Checkbox from "antd/lib/checkbox/Checkbox";
 import styles from "../ShowList.module.css";
 import TodoService from "../Services/TodoService";
 import { AiFillHeart } from "react-icons/ai";
+import { HandleFavourite } from "../Redux/ActionCreator";
 
 const ShowList = ({
   index,
@@ -23,8 +24,6 @@ const ShowList = ({
             size={24}
             onClick={(e) => {
               handleCheckFavourite(todos.id, !todos.isFavorite);
-              console.log(todos.taskName);
-              console.log("is Favourited", todos.isFavorite);
             }}
           />
           <Checkbox
